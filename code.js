@@ -1,38 +1,35 @@
-let time = 0;
-let on = true
+let counter = 0;
+let timeout;
+let timer_on = 0;
 
-document.getElementById("startTimer").addEventListener("click", command);
-document.getElementById("stopTimer").addEventListener("click", command);
+document.getElementById("startTimer").addEventListener("click", startCount);
+document.getElementById("stopTimer").addEventListener("click", stopt);
 document.getElementById("resetTimer").addEventListener("click", resett);
 
 function startt() {
-    on = true;
-    console.log(time);
-    document.getElementById("stopwatch").innerHTML = time++;
+    document.getElementById("stopwatch").innerHTML = counter;
+    counter++;
+    timeout = setTimeout(startt, 1000);
 
 }
 
+function startCount() {
+    if (!timer_on) {
+        timer_on = 1;
+        startt();
 
+    }
+}
 function stopt() {
-    on = false
-    console.log(time)
-    document.getElementById("stopwatch").innerHTML = time;
+    clearTimeout(timeout);
+    timer_on = 0;
+
 }
 
 
 function resett() {
-    document.getElementById("stopwatch").innerHTML = time -= time;
+    document.getElementById("stopwatch").innerHTML = counter -= counter;
     
 }
 
-
-
-function command() {
-    if (on == true) {
-        setTimeout(startt, 1000);
-    } else if (on == false) {
-        setTimeout(stopt, 1000);
-
-    }
-}
 
